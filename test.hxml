@@ -1,0 +1,10 @@
+-lib utest
+-lib zenlog
+-lib tink_core
+-lib compiletime
+
+-debug
+-cp src
+-cp test
+-main TestsMain
+-js bin/test.js 
