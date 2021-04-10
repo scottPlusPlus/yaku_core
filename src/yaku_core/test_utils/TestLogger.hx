@@ -1,6 +1,5 @@
 package yaku_core.test_utils;
 
-import haxe.ds.ArraySort;
 import zenlog.ILogger;
 import haxe.CallStack;
 
@@ -180,7 +179,7 @@ class TestLogger implements  ILogger {
 		}
 		
 		return messages.map(function(msg){
-			msg.stackSize = stackSizeMap.get(msg.stackSize).valOr(0);
+			msg.stackSize = stackSizeMap.get(msg.stackSize).orFallback(0);
 			return msg;
 		});
 	}

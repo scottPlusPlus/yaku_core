@@ -20,8 +20,8 @@ class PromiseTestUtils {
 	public static inline function assertErrAndContinue<T>(p:Promise<T>, onFail:String = "expected an error"):Promise<Noise> {
 		return p.flatMap(function(o){
             switch o {
-                case Failure(failure):
-                case Success(u):
+                case Failure(_):
+                case Success(_):
                     Assert.fail(onFail);
             }
             return Noise;

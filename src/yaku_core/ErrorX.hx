@@ -10,10 +10,6 @@ class ErrorX {
         return Error.withData(code, message, err, pos);
     }
 
-    public static inline function logOut(err:Error){
-        Log.error(err.message);
-    }
-
     public static inline function domainErr(message:String, ?pos):Error {
         return new Error(ErrorCode.Forbidden, message, pos);
     }

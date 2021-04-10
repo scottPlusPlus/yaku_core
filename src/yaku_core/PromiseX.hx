@@ -130,13 +130,11 @@ class PromiseX {
 		p.handle(function(o){
 			passResultIfWaitng(trigger, o);
 		});
-
 		PromiseX.waitPromise(timeoutMS).eager().handle(function(_){
 			var err = new Error('Promise timed out after ${timeoutMS}');
 			var o = Failure(err);
 			passResultIfWaitng(trigger, o);
 		});
-
 		return trigger.asPromise();
 	}
 
