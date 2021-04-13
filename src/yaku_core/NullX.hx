@@ -1,6 +1,6 @@
 package yaku_core;
 
-import tink.CoreApi.Lazy;
+import tink.CoreApi;
 
 class NullX {
 
@@ -8,9 +8,19 @@ class NullX {
         return n != null ? n : fallback.get();
     }
 
-    public static inline function nullThrows<T>(n:Null<T>):T {
+    public static inline function toOutcome<T>(n:Null<T>, ?err:Lazy<Error>):Outcome<T,Error> {
+        if (n != null){
+            return Success(nullThrows(n));
+        }
+        if (err == null){
+            err = new Error('unexpected null');
+        }
+        return Failure(err.get());
+    }
+
+    public static inline function nullThrows<T>(n:Null<T>, msg:String = 'unexpected null'):T {
         if (n == null){
-            throw('unexpected null!');
+            throw(msg);
         }
         return n;
     }
