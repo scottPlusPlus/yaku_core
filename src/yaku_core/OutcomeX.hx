@@ -1,5 +1,6 @@
 package yaku_core;
 
+import zenlog.Log;
 import tink.CoreApi.Outcome;
 import tink.core.Error;
 
@@ -41,5 +42,17 @@ class OutcomeX {
 				err = ErrorX.wrap(err, code, message, pos);
 				return Failure(err);
 		}
+	}
+
+	/*
+		If outcome is error, logs it.  Returns the input.
+	*/
+	public static function logErr<D>(outcome:Outcome<D, Error>):Outcome<D,Error> {
+		switch (outcome) {
+			case Success(_):
+			case Failure(failure):
+				Log.error(failure.message, null, failure.pos);
+		}
+		return outcome;
 	}
 }
