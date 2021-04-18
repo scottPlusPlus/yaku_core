@@ -29,17 +29,4 @@ class FutureX {
          trig.trigger(val);
          return trig.asFuture();
     }
-
-	public static function then<T1, T2>(f1:Future<T1>, f2:T1->Future<T2>):Future<T2> {
-		var res = new FutureTrigger<T2>();
-
-		f1.handle(function(val1:T1) {
-			var fut = f2(val1);
-			fut.handle(function(val2:T2) {
-				res.trigger(val2);
-			});
-		});
-
-		return res.asFuture();
-	}
 }
