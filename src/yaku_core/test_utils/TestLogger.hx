@@ -95,7 +95,7 @@ class TestLogger implements ILogger {
 	}
 
 	public function finishTest() {
-		debug("Finish Test: " + activeTestName);
+		debug('Finish Test: $activeTestName\n');
 		messageStack[messageStack.length - 1].stackSize = 0;
 
 		var messages = messageStack;
