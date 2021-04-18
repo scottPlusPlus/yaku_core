@@ -1,7 +1,5 @@
 package yaku_core;
 
-import zenlog.Log;
-
 class DebugValidations {
 
     /*
@@ -23,12 +21,9 @@ class DebugValidations {
         }
 
         for (ff in allFields){
-            Log.debug('checking field $ff');
             var val = Reflect.field(obj, ff);
             if (val == null){
                 nullFields.push(ff);
-            } else {
-                Log.debug('have val $val');
             }
         }
         return nullFields;
