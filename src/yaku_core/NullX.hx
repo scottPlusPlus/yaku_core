@@ -8,12 +8,12 @@ class NullX {
         return n != null ? n : fallback.get();
     }
 
-    public static inline function toOutcome<T>(n:Null<T>, ?err:Lazy<Error>):Outcome<T,Error> {
+    public static inline function toOutcome<T>(n:Null<T>, ?err:Lazy<Error>, ?pos :haxe.PosInfos):Outcome<T,Error> {
         if (n != null){
             return Success(nullThrows(n));
         }
         if (err == null){
-            err = new Error('unexpected null');
+            err = new Error('unexpected null', pos);
         }
         return Failure(err.get());
     }
