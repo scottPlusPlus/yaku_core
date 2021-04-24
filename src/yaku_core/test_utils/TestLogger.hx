@@ -133,10 +133,17 @@ class TestLogger implements ILogger {
 		if (msg.message == null) {
 			return msg;
 		}
-		var prefix = indentationPrefix(msg.stackSize);
-		if (prefix.length > 0) {
-			msg.message = prefix + msg.message;
+		if (!Std.is(msg, String)) {
+			return msg;
 		}
+		var prefix = switch (msg.level) {
+			case WARN: "WARN: ";
+			case ERROR: "ERROR: ";
+			case CRITICAL: "CRITICAL: ";
+			default: "";
+		};
+		var prefix = indentationPrefix(msg.stackSize) + prefix;
+		msg.message = prefix + msg.message;
 		return msg;
 	}
 
