@@ -29,7 +29,7 @@ class TestLogger implements ILogger {
 			enableDebugOnCritical: true,
 			enableDebugOnWarn: true,
 			enableDebugOnError: true,
-			indentChar: " . ."
+			indentChar: ". . "
 		}
 	}
 
@@ -133,7 +133,7 @@ class TestLogger implements ILogger {
 		if (msg.message == null) {
 			return msg;
 		}
-		if (!Std.is(msg, String)) {
+		if (!Std.is(msg.message, String)) {
 			return msg;
 		}
 		var prefix = switch (msg.level) {
@@ -152,9 +152,9 @@ class TestLogger implements ILogger {
 		for (_ in 0...size) {
 			res += activeConfig.indentChar;
 		}
-		if (res.length > 0) {
-			res += " ";
-		}
+		// if (res.length > 0) {
+		// 	res += " ";
+		// }
 		return res;
 	}
 
