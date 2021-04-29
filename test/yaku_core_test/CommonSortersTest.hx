@@ -18,4 +18,18 @@ class CommonSortersTest extends utest.Test {
         var expected = ["c", "b", "a"];
         Assert.same(expected, actual);
     }
+
+    public function testInts(){
+        var initial = [2, 1, 3];
+
+        var actual = initial.copy();
+        actual.sort(CommonSorters.intsAscending);
+        var expected = [1, 2, 3];
+        Assert.same(expected, actual);
+
+        actual = initial.copy();
+        actual.sort(CommonSorters.intsDescending);
+        var expected = [3, 2, 1];
+        Assert.same(expected, actual);
+    }
 }
