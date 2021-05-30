@@ -1,0 +1,58 @@
+package yaku_core.test_utils;
+
+using yaku_core.NullX;
+
+class MockAction<IN,OUT> {
+
+    public var history:Array<InOut<IN,OUT>> = [];
+
+    public var implementation:Action<IN,OUT>;
+    public var next:Null<Action<IN,OUT>>;
+
+    public function action(input:IN):OUT{
+        var act = next.orFallback(implementation);
+        next = null;
+        var out = act.run(input);
+        history.push({input:input, output:out});
+        return out;
+    }
+ 
+    public function overrideNext(action:Action<IN,OUT>){
+        next = action;
+    }
+
+    public function new(action:Action<IN,OUT>){
+        implementation = action;
+    }
+}
+
+typedef InOut<IN,OUT> = {
+    input:IN,
+    output:OUT
+}
+
+abstract Action<X,Y>(X->Y) from X->Y to X->Y {
+    
+    public function new(f:X->Y){
+        this = f;
+    }
+
+    @:from static public inline function fromFunc<X,Y>(f:X->Y):Action<X,Y>{
+        return cast f;
+    }
+    
+    @:from static public inline function fromVal<X,Y>(v:Y):Action<X,Y>{
+        var f = function(x:X):Y{
+            return v;
+        }
+        return new Action<X,Y>(f);
+    }
+
+    @:to public function to():X->Y {
+        return this;
+    }
+
+    public function run(x:X):Y {
+        return this(x);
+    }
+}
