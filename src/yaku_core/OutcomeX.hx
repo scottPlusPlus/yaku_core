@@ -55,4 +55,15 @@ class OutcomeX {
 		}
 		return outcome;
 	}
+
+
+	public static inline function adapt<In,Out>(outcome:Outcome<In,Error>, adapter:In->Out):Outcome<Out,Error> {
+		return switch (outcome) {
+			case Success(x):
+				var res = adapter(x);
+				return Success(res);
+			case Failure(err):
+				return Failure(err);
+		}
+	}
 }
