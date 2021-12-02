@@ -1,11 +1,12 @@
 package yaku_core.test_utils;
 
 import zenlog.ILogger;
+import zenlog.LogLevel;
 import haxe.CallStack;
 
 using yaku_core.NullX;
 
-class TestLogger implements ILogger {
+class TestLogger {
 	public function new(l:ILogger, ?config:Config) {
 		wrappedLogger = l;
 		if (config == null) {
