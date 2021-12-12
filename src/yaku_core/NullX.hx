@@ -1,5 +1,6 @@
 package yaku_core;
 
+import haxe.Exception;
 import tink.CoreApi;
 
 class NullX {
@@ -20,7 +21,7 @@ class NullX {
 
     public static inline function nullThrows<T>(n:Null<T>, msg:String = 'unexpected null'):T {
         if (n == null){
-            throw(msg);
+            throw(new Exception(msg));
         }
         return n;
     }

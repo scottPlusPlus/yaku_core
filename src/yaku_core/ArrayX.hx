@@ -1,5 +1,6 @@
 package yaku_core;
 
+import zenlog.Log;
 import tink.CoreApi.Lazy;
 using yaku_core.NullX;
 
@@ -15,3 +16,4 @@ class ArrayX {
         return getOrNull(arr, index).orFallback(fallback);
     }
 }
+

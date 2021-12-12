@@ -1,7 +1,10 @@
 package yaku_core_test;
 
+import zenlog.Log;
 import utest.Assert;
 import yaku_core.ArrayX;
+
+using yaku_core.ArrayX;
 
 class ArrayXTest extends utest.Test {
     
