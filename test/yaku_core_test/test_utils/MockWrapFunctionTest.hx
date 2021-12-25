@@ -41,7 +41,7 @@ class MockWrapFunctionTest extends utest.Test {
 		Assert.equals(TestVals.bar, mock.call(123));
 	}
 
-	public function testWithVoid() {
+	public function testVoidOut() {
 		var sum = 0;
 		var testFunc = function(i:Int):Void {
 			sum += i;
@@ -50,5 +50,14 @@ class MockWrapFunctionTest extends utest.Test {
 		var mock = new MockWrapFunction(testFunc);
 		mock.call(2);
 		Assert.equals(2, sum);
+	}
+
+	public function testVoidIn() {
+		var testFunc = function():Int {
+			return 5;
+		}
+		var mock = new MockWrapFunction(testFunc);
+		var val = mock.call(null);
+		Assert.equals(5, val);
 	}
 }

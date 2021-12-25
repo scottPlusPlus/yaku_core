@@ -6,7 +6,6 @@ using yaku_core.NullX;
 class MockWrapFunction<IN,OUT> {
 
     public var history:Array<InOut<IN,OUT>> = [];
-
     public var implementation:Action<IN,OUT>;
     public var next:Null<Action<IN,OUT>>;
 
@@ -48,6 +47,13 @@ abstract Action<X,Y>(X->Y) from X->Y to X->Y {
             return Noise;
         }
         return new Action<X,Noise>(wrappedF);
+    }
+
+    @:from static public inline function fromFuncVoidIn<Y>(f:Void->Y):Action<Any,Y> {
+        var wrappedF = function(a:Any):Y {
+            return f();
+        }
+        return new Action<Any,Y>(wrappedF);
     }
     
     @:from static public inline function fromVal<X,Y>(v:Y):Action<X,Y>{
