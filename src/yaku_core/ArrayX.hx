@@ -38,5 +38,9 @@ class ArrayX {
         }
         return true;
     }
+
+    public static inline function mapAndSort<T,U>(a:Array<T>, adapter:T->U, sorter:U->U->Int){
+        a.sort(CommonSorters.mapAndSort(adapter, sorter));
+    }
 }
 

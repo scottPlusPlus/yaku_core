@@ -93,5 +93,13 @@ class CommonSorters {
 			}
 			return sorter(a, b);
 		}
-	}	
+	}
+
+	public static inline function mapAndSort<T,U>(adapter:T->U, sorter:U->U->Int):T->T->Int {
+		return function (a:T, b:T):Int {
+			var ax = adapter(a);
+			var bx = adapter(b);
+			return sorter(ax, bx);
+		}
+	}
 }
