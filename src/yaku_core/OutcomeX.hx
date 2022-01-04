@@ -1,5 +1,7 @@
 package yaku_core;
 
+import tink.core.Promise;
+import tink.CoreApi.PromiseTrigger;
 import zenlog.Log;
 import tink.CoreApi.Outcome;
 import tink.core.Error;
@@ -65,5 +67,16 @@ class OutcomeX {
 			case Failure(err):
 				return Failure(err);
 		}
+	}
+
+	public static inline function asPromise<T>(outcome:Outcome<T,Error>):Promise<T> {
+		var pt = new PromiseTrigger<T>();
+		switch (outcome){
+			case Success(data):
+				pt.resolve(data);
+			case Failure(failure):
+				pt.reject(failure);
+		}
+		return pt.asPromise();
 	}
 }
