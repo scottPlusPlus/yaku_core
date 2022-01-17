@@ -16,6 +16,14 @@ class TestVals {
     public static final val1 = "val1";
     public static final val2 = "val2";
     public static final val3 = "val3";
-    public static final key0through9 = ["key1", "key2", "key3", "key4", "key5", "key6", "key7", "key8", "key9"];
-    public static final val0through9 = ["val1", "val2", "val3", "val4", "val5", "val6", "val7", "val8", "val9"];
+    public static final keys_0to9 = ["key0", "key1", "key2", "key3", "key4", "key5", "key6", "key7", "key8", "key9"];
+    public static final vals_0to9 = ["val0", "val1", "val2", "val3", "val4", "val5", "val6", "val7", "val8", "val9"];
+
+    public static function mapWithKVP_0to9():Map<String,String> {
+        var m = new Map<String,String>();
+        for (i in 0...10){
+            m.set(keys_0to9[i], vals_0to9[i]);
+        }
+        return m;
+    }
 }
