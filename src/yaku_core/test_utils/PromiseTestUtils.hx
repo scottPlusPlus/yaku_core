@@ -28,8 +28,11 @@ class PromiseTestUtils {
 		});
 	}
 
-	public static inline function closeTestChain<T>(p:Promise<T>, async:utest.Async){
-		return PromiseTestUtils.assertNoErr(p).next(function(v:T){
+	public static inline function closeTestChain<T>(p:Promise<T>, async:utest.Async, allowError = false){
+		if (!allowError){
+			p = PromiseTestUtils.assertNoErr(p);
+		}
+		return p.next(function(v:T){
 			async.done();
 			return v;
 		}).eager();
