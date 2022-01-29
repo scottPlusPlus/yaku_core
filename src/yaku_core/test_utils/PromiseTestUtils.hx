@@ -5,6 +5,7 @@ import tink.CoreApi;
 import utest.Assert;
 
 using yaku_core.OutcomeX;
+using yaku_core.PromiseX;
 
 class PromiseTestUtils {
 	public function new(){}
@@ -32,7 +33,8 @@ class PromiseTestUtils {
 		if (!allowError){
 			p = PromiseTestUtils.assertNoErr(p);
 		}
-		return p.next(function(v:T){
+
+		return p.noise().recoverWith(Noise).next(function(v:Noise){
 			async.done();
 			return v;
 		}).eager();
